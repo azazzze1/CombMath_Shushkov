@@ -15,10 +15,11 @@ class Solution{
 
     void generateYoungTables(std::vector<int> filled, std::vector<int> current);
 
-    void setDiagYoungForm(std::vector<int> newForm);
+    void writeSolutionToFile(); 
 
     private:
     std::vector<int> diagYoungForm;
+    std::vector<std::vector<int>> solutionTables; 
     std::ofstream solutionFile;
     int totalCells; 
 

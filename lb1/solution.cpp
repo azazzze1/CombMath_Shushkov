@@ -16,7 +16,7 @@ Solution::Solution(const std::string& fileName){
         diagYoungForm.push_back(h);
     }
 
-    solutionFile.open("solution.txt");
+    solutionFile.open("solution.txt", std::ios::trunc);
 
     if (!solutionFile) {
         std::cerr<<"Ошибка: файл solution.txt не был создан"<<std::endl;
@@ -28,15 +28,14 @@ Solution::Solution(const std::string& fileName){
     totalCells = std::accumulate(diagYoungForm.begin(), diagYoungForm.end(), 0); 
 
     generateYoungTables(filled, current);
+
+    writeSolutionToFile();
+
 }
 
 void Solution::generateYoungTables(std::vector<int> filled, std::vector<int> current){
     if (current.size() == totalCells){
-        for(int i = 0; i < current.size(); ++i){
-            if (i>0) solutionFile<<" ";
-            solutionFile<<current[i];
-        }
-        solutionFile<<"\n";
+        solutionTables.push_back(current);
         return;
     }
 
@@ -51,6 +50,16 @@ void Solution::generateYoungTables(std::vector<int> filled, std::vector<int> cur
 
         current.pop_back();
         --filled[i];
+    }
+}
+
+void Solution::writeSolutionToFile(){
+    for(int i = solutionTables.size()-1; i>=0; --i){
+        for (int j = 0; j < totalCells; ++j){
+            if (j > 0) solutionFile << " ";
+            solutionFile << solutionTables[i][j];
+        }
+        solutionFile << "\n";
     }
 }
 
