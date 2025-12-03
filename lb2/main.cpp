@@ -1,16 +1,15 @@
-#include <iostream>
-#include "reverseRSK.hpp"
-#include "RSK.hpp"
+#include "knuthEquivalence.hpp"
 
 
 int main(){
+    KnuthEquivalence ke ("permutation.txt");
 
-    RSK("permutation.txt");
+    std::vector<std::vector<int>> form = ke.convertRowSequenceToCells({0, 0, 1, 1, 0, 2});
 
-    ReverseRSK a("pTable.txt", "qTable.txt");
-
-    std::vector<int> result = a.algReverseRSK();
-    
-    for(auto i : result) std::cout<<i<<" ";
-    std::cout<<std::endl; 
+    for(auto i : form){
+        for(auto j : i){
+            std::cout << j << " "; 
+        }
+        std::cout<<std::endl; 
+    }
 }

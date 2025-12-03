@@ -15,7 +15,7 @@ public:
     void algRSK(); 
     void saveTableToFile(const std::string& filename, const std::vector<std::vector<int>>& table);
 
-    std::vector<int> getShape() const;
+    std::vector<int> getShape();
 
 private:
     std::vector<int> permutation; 

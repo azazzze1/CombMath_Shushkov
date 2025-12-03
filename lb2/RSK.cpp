@@ -29,7 +29,6 @@ RSK::RSK(const std::string& fileName){
 void RSK::algRSK(){
     this->P.clear();
     this->Q.clear();
-    this->shape.clear();
 
     if (this->permutation.empty()) return;
 
@@ -66,10 +65,6 @@ void RSK::algRSK(){
             }
         }
     }
-
-    for (std::vector<std::vector<int>>::const_iterator rit = P.begin(); rit != P.end(); ++rit) {
-        shape.push_back(static_cast<int>(rit->size()));
-    }
 }
 
 
@@ -86,4 +81,33 @@ void RSK::saveTableToFile(const std::string& fileName, const std::vector<std::ve
         }
     }
     file.close();
+}
+
+std::vector<int> RSK::getShape(){
+    this->shape.clear();
+
+    if (P.empty()) {
+        return {};
+    }
+
+    int maxCols = 0;
+    for (const std::vector<int>& row : P) {
+        if (row.size() > maxCols) {
+            maxCols = row.size();
+        }
+    }
+
+    std::vector<int> columnHeights(maxCols, 0);
+
+    for (int j = 0; j < maxCols; ++j) {
+        int height = 0;
+        for (const std::vector<int>& row : P) {
+            if (j < row.size()) {
+                height++;
+            }
+        }
+        columnHeights[j] = height;
+    }
+
+    return columnHeights;
 }
