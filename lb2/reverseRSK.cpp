@@ -65,3 +65,49 @@ std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& f
 
     return grid;
 }
+
+
+std::vector<int> ReverseRSK::algReverseRSK(){
+    int permutationSize = this->qPos.size();
+
+    this->permutation.resize(permutationSize); 
+
+    std::vector<std::vector<int>> P = this->tableP;
+
+    for(int i = permutationSize; i >= 1; --i){
+        std::pair<int, int> pos = qPos.at(i);
+        int row = pos.first;
+        int col = pos.second;
+
+        int x = P[row][col];
+        P[row][col] = -1;
+
+        while(row > 0){
+            int prewRow = row - 1;
+            int bestCol = -1;
+
+            for(int j = 0; j < static_cast<int>(P[prewRow].size()); ++j){
+                if(P[prewRow][j] != -1 && P[prewRow][j] < x){
+                    if(bestCol == -1 || P[prewRow][j] > P[prewRow][bestCol]){
+                        bestCol = j; 
+                    }
+                }
+            }
+            if(bestCol == -1){
+                std::cerr<<"Некорректная таблица Юнга!"<<std::endl;
+                std::exit(1); 
+            }
+
+            int temp = P[prewRow][bestCol];
+            P[prewRow][bestCol] = x;
+            x = temp;
+            row = prewRow;
+            col = bestCol;
+        }
+
+        this->permutation[i-1] = x;
+        
+    }
+
+    return permutation; 
+}

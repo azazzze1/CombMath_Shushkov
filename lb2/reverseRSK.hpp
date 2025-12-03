@@ -24,6 +24,8 @@ private:
     std::vector<std::vector<int>> tableP;
     std::vector<std::vector<int>> tableQ;
     std::map<int, std::pair<int, int>> qPos;
+
+    std::vector<int> permutation;
     
 
 
