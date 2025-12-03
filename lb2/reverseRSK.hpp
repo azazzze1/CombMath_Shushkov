@@ -1,3 +1,6 @@
+#pragma once
+
+
 #include <string>
 #include <vector>
 #include <fstream>
@@ -27,6 +30,4 @@ private:
 
     std::vector<int> permutation;
     
-
-
 };

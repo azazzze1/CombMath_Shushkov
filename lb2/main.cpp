@@ -1,9 +1,13 @@
 #include <iostream>
 #include "reverseRSK.hpp"
+#include "RSK.hpp"
 
 
 int main(){
-    ReverseRSK a("testP.txt", "testQ.txt");
+
+    RSK("permutation.txt");
+
+    ReverseRSK a("pTable.txt", "qTable.txt");
 
     std::vector<int> result = a.algReverseRSK();
     
