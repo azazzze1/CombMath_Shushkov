@@ -6,6 +6,8 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <set>
+
 
 #include "reverseRSK.hpp"
 #include "RSK.hpp"
@@ -22,7 +24,9 @@ public:
     std::vector<std::vector<int>> convertRowSequenceToCells(const std::vector<int>& rowSeq);
 
 private:  
-    
+    std::vector<std::vector<int>> POrig;
+    std::vector<std::vector<int>> QOrig;
+    std::vector<int> originalPermutation;
     std::vector<int> colHeights; 
 };
 

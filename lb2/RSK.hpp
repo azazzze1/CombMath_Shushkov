@@ -10,6 +10,10 @@
 
 class RSK {
 public:
+    std::vector<std::vector<int>> P; 
+    std::vector<std::vector<int>> Q;
+    std::vector<int> permutation; 
+
     RSK(const std::string& fileName);
 
     void algRSK(); 
@@ -18,8 +22,5 @@ public:
     std::vector<int> getShape();
 
 private:
-    std::vector<int> permutation; 
-    std::vector<std::vector<int>> P; 
-    std::vector<std::vector<int>> Q;
     std::vector<int> shape;
 };

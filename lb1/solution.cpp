@@ -16,10 +16,10 @@ Solution::Solution(const std::string& fileName){
         diagYoungForm.push_back(h);
     }
 
-    solutionFile.open("solution.txt", std::ios::trunc);
+    solutionFile.open("youngTables.txt", std::ios::trunc);
 
     if (!solutionFile) {
-        std::cerr<<"Ошибка: файл solution.txt не был создан"<<std::endl;
+        std::cerr<<"Ошибка: файл youngTables.txt не был создан"<<std::endl;
     }
 
     std::vector<int> filled(diagYoungForm.size(), 0);
@@ -61,6 +61,8 @@ void Solution::writeSolutionToFile(){
         }
         solutionFile << "\n";
     }
+
+    solutionFile.close(); 
 }
 
 Solution::~Solution(){
