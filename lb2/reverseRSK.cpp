@@ -2,21 +2,13 @@
 
 
 ReverseRSK::ReverseRSK(const std::string& fileNameP, const std::string& fileNameQ){
-    this->tableP = loadTableFromFile(fileNameP);
-    this->tableQ = loadTableFromFile(fileNameQ);
-
-
-    for(auto i : this->tableP){
-        for(auto j : i){
-            std::cout<<j<<' ';
-        }
-        std::cout<<std::endl;
-    }
-    
+    tableCell maxQCell;
+    this->tableP = loadTableFromFile(fileNameP, maxQCell, false);
+    this->tableQ = loadTableFromFile(fileNameQ, maxQCell, true);
 }
 
 
-std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& fileName){
+std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& fileName, tableCell& maxQCell, bool loadQPositions){
     std::ifstream file(fileName);
 
     if (!file.is_open()){
@@ -38,7 +30,11 @@ std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& f
         cellsList.push_back(newCell);
 
         if(newCell.value > maxCellValue) maxCellValue = newCell.value; 
-        if(newCell.x > maxRow) maxRow = newCell.x;
+
+        if(newCell.x > maxRow){
+            maxRow = newCell.x;
+            maxQCell = newCell; 
+        };
     }
 
     file.close();
@@ -54,6 +50,15 @@ std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& f
         grid[i].assign(rowWidths[i], -1);
     }
 
+    if (loadQPositions){
+        for(const tableCell& cell : cellsList){
+            grid[cell.x][cell.y] = cell.value;
+            this->qPos[cell.value] = std::make_pair(cell.x, cell.y);
+        }
+
+        return grid;
+    }
+    
     for(const tableCell& cell : cellsList){
         grid[cell.x][cell.y] = cell.value;
     }
