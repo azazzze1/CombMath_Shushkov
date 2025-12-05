@@ -1,14 +1,13 @@
 #include "reverseRSK.hpp"
 
-
 ReverseRSK::ReverseRSK(const std::string& fileNameP, const std::string& fileNameQ){
     tableCell maxQCell;
-    this->tableP = loadTableFromFile(fileNameP, maxQCell, false);
-    this->tableQ = loadTableFromFile(fileNameQ, maxQCell, true);
+    this->tableP = loadTableFromFile(fileNameP, false);
+    this->tableQ = loadTableFromFile(fileNameQ, true);
 }
 
 
-std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& fileName, tableCell& maxQCell, bool loadQPositions){
+std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& fileName, bool loadQPositions){
     std::ifstream file(fileName);
 
     if (!file.is_open()){
@@ -33,7 +32,6 @@ std::vector<std::vector<int>> ReverseRSK::loadTableFromFile(const std::string& f
 
         if(newCell.x > maxRow){
             maxRow = newCell.x;
-            maxQCell = newCell; 
         };
     }
 
@@ -86,7 +84,7 @@ std::vector<int> ReverseRSK::algReverseRSK(){
             int prewRow = row - 1;
             int bestCol = -1;
 
-            for(int j = 0; j < static_cast<int>(P[prewRow].size()); ++j){
+            for(int j = 0; j < P[prewRow].size(); ++j){
                 if(P[prewRow][j] != -1 && P[prewRow][j] < x){
                     if(bestCol == -1 || P[prewRow][j] > P[prewRow][bestCol]){
                         bestCol = j; 

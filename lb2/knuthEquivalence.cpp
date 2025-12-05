@@ -40,7 +40,7 @@ std::vector<std::vector<int>> KnuthEquivalence::convertRowSequenceToCells(const 
     int maxRow = *std::max_element(rowSeq.begin(), rowSeq.end());
     std::vector<std::vector<int>> table(maxRow + 1);
 
-    for (int i = 0; i < static_cast<int>(rowSeq.size()); ++i) {
+    for (int i = 0; i < rowSeq.size(); ++i) {
         int row = rowSeq[i];
         int step = i + 1; 
         table[row].push_back(step);

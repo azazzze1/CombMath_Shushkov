@@ -9,11 +9,18 @@
 
 
 struct tableCell{
+ /* 
+    x - столбец,
+    y - строка,
+    value - значение
+
+    В стандартной таблице Юнга прямой формы. 
+ */
+
     int x;
     int y;
     int value;
 };
-
 
 class ReverseRSK {
 public:
@@ -21,7 +28,7 @@ public:
     std::vector<int> algReverseRSK();
 
 private:
-    std::vector<std::vector<int>> loadTableFromFile(const std::string& fileName, tableCell& maxQCell, bool loadQPositions);
+    std::vector<std::vector<int>> loadTableFromFile(const std::string& fileName, bool loadQPositions);
 
     std::vector<std::vector<int>> tableP;
     std::vector<std::vector<int>> tableQ;

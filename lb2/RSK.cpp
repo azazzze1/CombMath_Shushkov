@@ -53,7 +53,7 @@ void RSK::algRSK(){
             auto it = std::lower_bound(pRow.begin(), pRow.end(), bumped);
             int pos = static_cast<int>(it - pRow.begin());
 
-            if (pos == static_cast<int>(pRow.size())) {
+            if (pos == pRow.size()) {
                 pRow.push_back(bumped);
                 qRow.push_back(step);
                 bumped = -1;
